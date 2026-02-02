@@ -1,0 +1,24 @@
+{
+  "name": "cervical_cancer",
+  "version": "1.0.0",
+  "description": "AI-based cervical cancer detection system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeevithgowdarm/Cervical_cancer-.git"
+  },
+  "keywords": [
+    "AI",
+    "ML",
+    "healthcare"
+  ],
+  "author": "JEEVITHGOWDA_R_M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeevithgowdarm/Cervical_cancer-/issues"
+  },
+  "homepage": "https://github.com/jeevithgowdarm/Cervical_cancer-#readme"
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cervical Cancer Risk Prediction</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('/static/image.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-y: auto;
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 1000px;
+      margin: 30px auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type=number], input[type=text] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .full-width {
+      grid-column: span 3;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    @media screen and (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+
+  <div class="form-container">
+    <h1>Cervical Cancer Risk Prediction</h1>
+    {% if prediction_text %}
+  <h2 style="text-align:center; color:lightgreen;">{{ prediction_text }}</h2>
+{% endif %}
+
+    <form action="/predict" method="post">
+      <!-- Auto layout using grid -->
+      <div>
+        <label>Age:</label>
+        <input type="number" step="any" name="Age" required>
+      </div>
+      <div>
+        <label>Number of sexual partners:</label>
+        <input type="number" step="any" name="Number_of_sexual_partners" required>
+      </div>
+      <div>
+        <label>First sexual intercourse (age):</label>
+        <input type="number" step="any" name="First_sexual_intercourse" required>
+      </div>
+
+      <div>
+        <label>Number of pregnancies:</label>
+        <input type="number" step="any" name="Num_of_pregnancies" required>
+      </div>
+      <div>
+        <label>Smokes (0 = No, 1 = Yes):</label>
+        <input type="number" step="1" min="0" max="1" name="Smokes" required>
+      </div>
+      <div>
+        <label>Smokes (years):</label>
+        <input type="number" step="any" name="Smokes_years" required>
+      </div>
+
+      <div>
+        <label>Smokes (packs/year):</label>
+        <input type="number" step="any" name="Smokes_packs_year" required>
+      </div>
+      <div>
+        <label>Hormonal Contraceptives (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Hormonal_Contraceptives" required>
+      </div>
+      <div>
+        <label>Hormonal Contraceptives (years):</label>
+        <input type="number" step="any" name="Hormonal_Contraceptives_years" required>
+      </div>
+
+      <div>
+        <label>IUD (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="IUD" required>
+      </div>
+      <div>
+        <label>IUD (years):</label>
+        <input type="number" step="any" name="IUD_years" required>
+      </div>
+      <div>
+        <label>STDs (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs" required>
+      </div>
+
+      <div>
+        <label>STDs (number):</label>
+        <input type="number" step="any" name="STDs_number" required>
+      </div>
+      <div>
+        <label>STDs: condylomatosis (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_condylomatosis" required>
+      </div>
+      <div>
+        <label>STDs: cervical condylomatosis (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_cervical_condylomatosis" required>
+      </div>
+
+      <div>
+        <label>STDs: vaginal condylomatosis (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_vaginal_condylomatosis" required>
+      </div>
+      <div>
+        <label>STDs: vulvo-perineal condylomatosis (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_vulvo_perineal_condylomatosis" required>
+      </div>
+      <div>
+        <label>STDs: syphilis (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_syphilis" required>
+      </div>
+
+      <div>
+        <label>STDs: pelvic inflammatory disease (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_pelvic_inflammatory_disease" required>
+      </div>
+      <div>
+        <label>STDs: genital herpes (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_genital_herpes" required>
+      </div>
+      <div>
+        <label>STDs: molluscum contagiosum (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_molluscum_contagiosum" required>
+      </div>
+
+      <div>
+        <label>STDs: AIDS (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_AIDS" required>
+      </div>
+      <div>
+        <label>STDs: HIV (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_HIV" required>
+      </div>
+      <div>
+        <label>STDs: Hepatitis B (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_Hepatitis_B" required>
+      </div>
+
+      <div>
+        <label>STDs: HPV (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="STDs_HPV" required>
+      </div>
+      <div>
+        <label>STDs: Number of diagnosis:</label>
+        <input type="number" step="any" name="STDs_Number_of_diagnosis" required>
+      </div>
+      <div>
+        <label>STDs: Time since first diagnosis:</label>
+        <input type="number" step="any" name="STDs_Time_since_first_diagnosis" required>
+      </div>
+
+      <div>
+        <label>STDs: Time since last diagnosis:</label>
+        <input type="number" step="any" name="STDs_Time_since_last_diagnosis" required>
+      </div>
+      <div>
+        <label>Dx: Cancer (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Dx_Cancer" required>
+      </div>
+      <div>
+        <label>Dx: CIN (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Dx_CIN" required>
+      </div>
+
+      <div>
+        <label>Dx: HPV (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Dx_HPV" required>
+      </div>
+      <div>
+        <label>Dx (general, 0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Dx" required>
+      </div>
+      <div>
+        <label>Biopsy (0/1):</label>
+        <input type="number" step="1" min="0" max="1" name="Biopsy" required>
+      </div>
+
+      <div class="full-width">
+        <button type="submit">Predict</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
